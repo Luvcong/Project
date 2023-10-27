@@ -1,15 +1,14 @@
 package com.kh.semi.category.manager;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.filters.SetCharacterEncodingFilter;
-
-import com.kh.semi.board.recipe.model.service.CategoryService;
+import com.kh.semi.board.recipe.model.service.CategoryServiceImpl;
 
 /**
  * Servlet implementation class CategoryUpdateController
@@ -18,14 +17,14 @@ import com.kh.semi.board.recipe.model.service.CategoryService;
 public class CategoryUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private CategoryService categoryService;
+	private CategoryServiceImpl categoryServiceImpl;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public CategoryUpdateController() {
         super();
-        categoryService = new CategoryService();
+        categoryServiceImpl = new CategoryServiceImpl();
     }
 
 	/**
@@ -44,7 +43,7 @@ public class CategoryUpdateController extends HttpServlet {
 		System.out.println("categoryUpdateName : " + categoryUpdateName);
 		// 3) 데이터가공 xx
 		// 4) 서비스호출
-		int result = categoryService.updateCategory(categoryName, categoryUpdateName);
+		int result = categoryServiceImpl.updateCategory(categoryName, categoryUpdateName);
 		System.out.println("result : " + result);
 		// 5) 화면
 		if(result > 0) {

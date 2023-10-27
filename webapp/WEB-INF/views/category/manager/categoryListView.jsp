@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.kh.semi.category.model.vo.RecipeCategory, com.kh.semi.common.model.vo.PageInfo" %>
+<%@ page import="java.util.ArrayList, com.kh.semi.board.recipe.model.vo.RecipeCategory, com.kh.semi.common.model.vo.PageInfo" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 //	ArrayList<RecipeCategory> list = (ArrayList<RecipeCategory>)request.getAttribute("list");

@@ -8,7 +8,7 @@
 	</settings>
 	
  	<typeAliases>
-		<typeAlias type="com.kh.semi.category.model.vo.RecipeCategory" alias="category" />
+		<typeAlias type="com.kh.semi.board.recipe.model.vo.RecipeCategory" alias="category" />
  	</typeAliases>
 
 	<environments default="development">

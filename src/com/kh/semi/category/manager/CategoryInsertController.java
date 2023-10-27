@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.semi.board.recipe.model.service.CategoryService;
+import com.kh.semi.board.recipe.model.service.CategoryServiceImpl;
 
 /**
  * Servlet implementation class CategoryInsertController
@@ -17,14 +17,14 @@ import com.kh.semi.board.recipe.model.service.CategoryService;
 public class CategoryInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private CategoryService categoryService;
+	private CategoryServiceImpl categoryServiceImpl;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public CategoryInsertController() {
         super();
-        categoryService = new CategoryService();
+        categoryServiceImpl = new CategoryServiceImpl();
         // TODO Auto-generated constructor stub
     }
 
@@ -39,7 +39,7 @@ public class CategoryInsertController extends HttpServlet {
 		String recipeCategoryName = request.getParameter("recipeCategoryName");
 		// 3) 데이터가공 - xx
 		// 4) service호출
-		int result = categoryService.insertCategory(recipeCategoryName);
+		int result = categoryServiceImpl.insertCategory(recipeCategoryName);
 		// 5) 응답화면 지정
 		if(result > 0) {
 			request.getSession().setAttribute("successMsg", "카테고리 추가가 완료되었습니다!");

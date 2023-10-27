@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>Tag 관련 SQL문</comment>
+
+	<!-- 등록된 해시태그명과 해시태그 번호 조회 SQL문 -->
+	<entry key="selectAllTagname">
+		SELECT 
+				 TAG_NO				
+				,TAG_NAME
+		  FROM 
+		  		TB_TAG
+	</entry>
+	
+	<!-- 해시태그명에 해당하는 해시태그 번호 조회  -->
+	<entry key="selectTagNo">
+		SELECT 
+				TAG_NO 
+		  FROM 
+		  		TB_TAG
+		 WHERE 
+		 		TAG_NAME = ?
+	</entry>
+	
+	<!-- 해시태그 조회 페이징처리까지 -->
+	<entry key="selectPHashTag">
+		SELECT *
+		    FROM (SELECT ROWNUM RNUM, A.*
+		            FROM (SELECT DISTINCT
+								    TAG_NO, 
+								    TAG_NAME, 
+								    COUNT(*)OVER(PARTITION BY TAG_NO)-1 COUNT 
+								FROM 
+									TB_TAG
+								LEFT JOIN 
+								    TB_RECIPE_TAG USING(TAG_NO)
+								LEFT JOIN
+								    TB_NOTICE_TAG USING(TAG_NO)
+								ORDER BY TAG_NO) A)
+		    WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<!-- 해시태그 추가 -->
+	<entry key="hashTagInsert">
+		INSERT INTO TB_TAG
+		VALUES (SEQ_TAG.NEXTVAL, ?, SYSDATE)
+	</entry>
+	
+	<!-- 해시태그 수정 -->
+	<entry key="hashtagUpdate">
+		UPDATE TB_TAG SET
+		TAG_NAME = ?
+		WHERE TAG_NO = ?
+	</entry>
+	
+	<!-- 해시태그 삭제 -->
+	<entry key="hashtagDelete">
+		DELETE FROM TB_TAG
+			WHERE TAG_NO = ?
+	</entry>
+</properties>

@@ -9,13 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
-
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.kh.semi.board.recipe.model.service.CategoryService;
+import com.kh.semi.board.recipe.model.service.CategoryServiceImpl;
 import com.kh.semi.board.recipe.model.vo.RecipeCategory;
-import com.kh.semi.common.model.vo.PageInfo;
 
 /**
  * Servlet implementation class CategoryCheckController
@@ -23,14 +19,14 @@ import com.kh.semi.common.model.vo.PageInfo;
 @WebServlet("/jhcheck.ct")
 public class CategoryCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private CategoryService categoryService;
+	private CategoryServiceImpl categoryServiceImpl;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public CategoryCheckController() {
         super();
-        categoryService = new CategoryService();
+        categoryServiceImpl = new CategoryServiceImpl();
         // TODO Auto-generated constructor stub
     }
 
@@ -45,7 +41,7 @@ public class CategoryCheckController extends HttpServlet {
 		String checkCategoryName = request.getParameter("checkCategoryName");
 		// 3) 가공xx
 		// 4) 요청
-		ArrayList<RecipeCategory> list = categoryService.checkCategory(checkCategoryName);
+		ArrayList<RecipeCategory> list = categoryServiceImpl.checkCategory(checkCategoryName);
 		// 5) 응답화면
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(list, response.getWriter());

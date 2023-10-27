@@ -1,11 +1,6 @@
 package com.kh.semi.category.manager;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,11 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.kh.semi.board.recipe.model.service.CategoryService;
+import com.kh.semi.board.recipe.model.service.CategoryServiceImpl;
 
 /**
  * Servlet implementation class CategortDeleteController
@@ -26,14 +19,14 @@ import com.kh.semi.board.recipe.model.service.CategoryService;
 public class CategortDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private CategoryService categoryService;
+	private CategoryServiceImpl categoryServiceImpl;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public CategortDeleteController() {
         super();
-        categoryService = new CategoryService();
+        categoryServiceImpl = new CategoryServiceImpl();
         // TODO Auto-generated constructor stub
     }
 
@@ -79,7 +72,7 @@ public class CategortDeleteController extends HttpServlet {
 		for(int i = 0; i < categoryNoArr.length; i++) {
 			int key = Integer.parseInt(categoryNoArr[i]);
 			int val = Integer.parseInt(categoryCountArr[i]);
-			int result = categoryService.deleteCategory(key, val);
+			int result = categoryServiceImpl.deleteCategory(key, val);
 			
 			if(result > 0) {
 				jArr.add(key);	// categoryNo으로 tr remove

@@ -41,10 +41,10 @@
             	<table id="check-table">
             		<tr>
             			<td>
-            				<input class="form-control form-control-sm" id="checkName" name="checkCategoryName" onkeydown="checkSearchName()" type="text" placeholder="검색할 카테고리명을 입력하세요" size="30">
+            				<input class="form-control form-control-sm" id="searchName" name="searchCategoryName" onkeydown="searchNameKeydown()" type="text" placeholder="검색할 카테고리명을 입력하세요" size="30">
            				</td>
            				<td>
-            				<button onclick="checkCategory()" class="btn btn-sm btn-warning">조회</button>
+            				<button onclick="searchCategory()" class="btn btn-sm btn-warning">조회</button>
            				</td>
             		</tr>
             	</table>

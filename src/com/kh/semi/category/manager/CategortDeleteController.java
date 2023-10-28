@@ -35,8 +35,6 @@ public class CategortDeleteController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 1) get 인코딩xx
-		// 1-1) 형식지정
 		// 2) 전달값뽑기 - 배열
 //		String[] categoryNoArr = request.getParameterValues("categoryNo");
 //		String[] categoryCountArr = request.getParameterValues("categoryCount");
@@ -84,8 +82,6 @@ public class CategortDeleteController extends HttpServlet {
 		
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(jArr, response.getWriter());
-		
-		
 	}
 
 	/**

@@ -32,12 +32,9 @@ public class CategoryDuplicateController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 1)
-		request.setCharacterEncoding("UTF-8");
-		// 2)
-		String addCategoryName = request.getParameter("addCategoryName");
+		String categoryNewName = request.getParameter("addCategoryName");
 		// System.out.println(addCategoryName);	// 값 ok
-		int count = categoryServiceImpl.duplicateCheckCategory(addCategoryName);
+		int count = categoryServiceImpl.duplicateCheckCategory(categoryNewName);
 		response.setContentType("text/html; charset=UTF-8");
 		if(count > 0) {
 			response.getWriter().print("N");

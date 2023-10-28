@@ -23,10 +23,10 @@
 	}	// checkedByte
   
 //  <!-- 카테고리 키워드 입력 후 Enter누르면 카테고리 조회 -->
-	function checkSearchName(){
+	function searchNameKeydown(){
 		console.log(event.code);
 		if(event.code == 'Enter'){
-			checkCategory();	
+			searchCategory();	
 		}
 	}
 
@@ -243,24 +243,24 @@
   		}	// deleteCategory
   
 //  <!-- jsp로 수정예정 -->
-  		function checkCategory(){
+  		function searchCategory(){
   			
   			// let test = document.getElementById('check-table');
   			// let input_test = test.querySelector('input');
   			// console.log(test);
   			// console.log(input_test.value);
   			
-  			let input = document.getElementById('checkName');
+  			let input = document.getElementById('searchName');
   			// console.log(input);
   			// console.log(input.value);			// 값 ok
-  			let checkCategoryName = input.value;
-  			console.log(checkCategoryName);			// 값 ok
+  			let searchCategoryName = input.value;
+  			console.log(searchCategoryName);			// 값 ok
   			
    			$.ajax({
   				url : 'jhcheck.ct',
   				type : 'post',
   				dataType : 'json',
-  				data : {'checkCategoryName' : checkCategoryName},
+  				data : {'searchCategoryName' : searchCategoryName},
    				success : function(result){
    					console.log('성공');
    					
@@ -286,7 +286,7 @@
    				}	// error
    				
   			}) 
-  		}	// checkCategory
+  		}	// searchCategory
   		
   		
 /*   	$(function(){

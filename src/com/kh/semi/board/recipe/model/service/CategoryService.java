@@ -1,6 +1,7 @@
 package com.kh.semi.board.recipe.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.semi.board.recipe.model.vo.RecipeCategory;
 import com.kh.semi.common.model.vo.PageInfo;
@@ -41,21 +42,21 @@ public interface CategoryService {
 	 * @param categoryUpdateName - 변경 카테고리명
 	 * @return 카테고리명 변경 성공 여부 및 중복체크
 	 */
-	int updateCategory(String categoryName, String categoryUpdateName);
+	int updateCategory(HashMap<String, String> map);
 	
 	/**
 	 * 카테고리 키워드 검색
-	 * @param checkCategoryName - 카테고리 검색 키워드명
+	 * @param searchCategoryName - 카테고리 검색 키워드명
 	 * @return 키워드에 해당하는 카테고리명 리스트
 	 */
-	ArrayList<RecipeCategory> checkCategory(String checkCategoryName);
+	ArrayList<RecipeCategory> searchCategoryName(String searchCategoryName);
 	
 	/**
 	 * 카테고리 중복 일치 여부 확인
 	 * @param addCategoryName - 변경 카테고리명
 	 * @return 키워드 일치여부 (일치 == 1 / 불일치 == 0)
 	 */
-	int duplicateCheckCategory(String addCategoryName);
+	int duplicateCheckCategory(String categoryNewName);
 	
 	
 }	// end class

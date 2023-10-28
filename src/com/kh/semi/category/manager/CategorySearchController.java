@@ -17,14 +17,14 @@ import com.kh.semi.board.recipe.model.vo.RecipeCategory;
  * Servlet implementation class CategoryCheckController
  */
 @WebServlet("/jhcheck.ct")
-public class CategoryCheckController extends HttpServlet {
+public class CategorySearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CategoryServiceImpl categoryServiceImpl;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CategoryCheckController() {
+    public CategorySearchController() {
         super();
         categoryServiceImpl = new CategoryServiceImpl();
         // TODO Auto-generated constructor stub
@@ -35,18 +35,13 @@ public class CategoryCheckController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 1) post
-		request.setCharacterEncoding("UTF-8");
-		// 2) 값
-		String checkCategoryName = request.getParameter("checkCategoryName");
+		String searchCategoryName = request.getParameter("searchCategoryName");
 		// 3) 가공xx
 		// 4) 요청
-		ArrayList<RecipeCategory> list = categoryServiceImpl.checkCategory(checkCategoryName);
+		ArrayList<RecipeCategory> list = categoryServiceImpl.searchCategoryName(searchCategoryName);
 		// 5) 응답화면
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(list, response.getWriter());
-
-		
 	}
 
 	/**

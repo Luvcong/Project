@@ -34,7 +34,6 @@ public class CategoryInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 카테고리명 20byte == 8글자
-		// 1) get방식 - xx
 		// 2) 전달값뽑기
 		String recipeCategoryName = request.getParameter("recipeCategoryName");
 		// 3) 데이터가공 - xx

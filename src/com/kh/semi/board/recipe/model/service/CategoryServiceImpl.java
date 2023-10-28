@@ -1,6 +1,7 @@
 package com.kh.semi.board.recipe.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -46,36 +47,80 @@ public class CategoryServiceImpl implements CategoryService {
 		SqlSession sqlSession = Template.getSqlSession();
 		int result = categoryDao.insertCategory(sqlSession, recipeCategoryName);
 		// System.out.println(result);
+		if(result > 0) sqlSession.commit(); 
 		
 		sqlSession.close();
 		
 		return result;
-	}
-
+	}	// insertCategory
+	
+	
+	// 카테고리 삭제 및 레시피 글 상태 업데이트
 	@Override
 	public int deleteCategory(int categoryNo, int categoryCount) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+		
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		if(categoryCount > 0) {
+			int resultUpdate = categoryDao.updateRecipeStatus(sqlSession, categoryNo);
+		}
+		
+		int resultDelete = categoryDao.deleteCategory(sqlSession, categoryNo);
+		
+		if(resultDelete > 0) sqlSession.commit();
+		
+		sqlSession.close();
+		
+		return resultDelete;
+	}	// deleteCategory
+	
+	
+	// 카테고리명 변경 및 중복체크
 	@Override
-	public int updateCategory(String categoryName, String categoryUpdateName) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public int updateCategory(HashMap<String, String> map) {
+		
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int resultUpdate = 0;
+		int resultCheck = categoryDao.categoryNameCheck(sqlSession, map);
+		
+		if(resultCheck == 0) {
+			resultUpdate = categoryDao.updateCategory(sqlSession, map);
+		}
+		
+		if(resultUpdate > 0) sqlSession.commit();
+		
+		sqlSession.close();
+		
+		return resultUpdate;
+		
+	}	// updateCategory
 
-
-
+	
+	// 카테고리 키워드 검색
 	@Override
-	public ArrayList<RecipeCategory> checkCategory(String checkCategoryName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	public ArrayList<RecipeCategory> searchCategoryName(String searchCategoryName) {
+		
+		SqlSession sqlSession = Template.getSqlSession();
+		ArrayList<RecipeCategory> list = categoryDao.searchCategoryName(sqlSession, searchCategoryName);
+		
+		sqlSession.close();
+		
+		return list;
+		
+	}	// checkCategory
+	
+	
+	// 카테고리 중복 일치 여부 확인
 	@Override
-	public int duplicateCheckCategory(String addCategoryName) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int duplicateCheckCategory(String categoryNewName) {
+		
+		SqlSession sqlSession = Template.getSqlSession();
+		int result = categoryDao.duplicateCheckCategory(sqlSession, categoryNewName);
+		
+		sqlSession.close();
+		
+		return result;
 	}
 	
 

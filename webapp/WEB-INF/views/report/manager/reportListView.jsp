@@ -2,19 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.kh.semi.report.model.vo.Report, com.kh.semi.common.model.vo.PageInfo" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<%
-//	ArrayList<Report> list = (ArrayList<Report>)request.getAttribute("list");
-	String successMsg = (String)session.getAttribute("successMsg");
-	String failMsg = (String)session.getAttribute("failMsg");
-	
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	int reportListCount = pi.getListCount();
-	int reportListPage = pi.getCurrentPage();
-	int reportStartPage = pi.getStartPage();
-	int reportEndPage = pi.getEndPage();
-	int reportMaxPage = pi.getMaxPage();
- %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +44,7 @@
             </div>
             <div class="h-content d-flex p-3">  <!-- 패딩 1rem -->
                 <div class="mr-auto">	
-                    조회수 <span class="waiting">10</span><span>개</span>
+                    조회수 <span class="waiting">${ requestScope.pi.listCount }</span><span>개</span>
                 </div>
                 <div >
                     <button type="button" onclick="showDetailReportModal()" class="btn btn-sm btn-warning">상세보기</button>
@@ -113,19 +100,9 @@
 	
 	<!-- 페이징바 -->
 	<div class="paging-area">
-		<% if(reportListPage != 1) { %>
-			<button onclick="page('<%= reportListPage -1 %>');" class="btn btn-warning">&lt;</button>
-		<% } %>
-		<% for(int i = reportStartPage; i <= reportEndPage; i++) { %>
-			<% if(reportListPage != i) { %>
-				<button onclick="page('<%= i %>');" class="btn btn-warning"><%= i %></button>
-			<% } else { %>
-				<button disabled class="btn btn-warning"><%= i %></button>
-			<% } %>
-		<% } %>
-		<% if(reportListPage != reportMaxPage) { %>
-			<button onclick="page('<%= reportListPage + 1 %>');" class="btn bbtn-warning">&gt;</button>
-		<% } %>
+		<c:forEach var="p" begin="${ requestScope.pi.startPage }" end="${ requestScope.pi.endPage }">
+			<button onclick="location.href='${ pageContext.request.contextPath }/jhselect.rp?page=${ p }';" class="btn btn-warning">${ p }</button>
+		</c:forEach>
 	</div>	<!-- 페이징바 -->
 	</div>	<!-- rs-content -->
 	
@@ -142,7 +119,7 @@
 		               <!-- Modal body -->
 		               <div class="modal-body">
 							<input type="hidden" name="reportNo">
-							<input type="hidden" name="categortName">
+							<!-- <input type="hidden" name="categoryName"> -->
 							<table class="modal-table" border="1">
 								<tr>
 									<th>유형</th>

@@ -1,7 +1,6 @@
 package com.kh.semi.coupon.controller.manager;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.semi.coupon.model.service.manager.CouponService;
+import com.kh.semi.coupon.model.service.manager.CouponServiceImpl;
 import com.kh.semi.coupon.model.vo.Coupon;
 
 /**
@@ -18,14 +17,14 @@ import com.kh.semi.coupon.model.vo.Coupon;
 @WebServlet("/jhinsert.cp")
 public class CouponInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private CouponService couponService;
+	private CouponServiceImpl couponServiceImpl;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public CouponInsertController() {
         super();
-        couponService = new CouponService();
+        couponServiceImpl = new CouponServiceImpl();
         // TODO Auto-generated constructor stub
     }
 
@@ -52,7 +51,7 @@ public class CouponInsertController extends HttpServlet {
 		coupon.setCouponReason(couponReason);
 		coupon.setCouponRatio(couponRatio);
 		
-		int result = couponService.insertCoupon(coupon);
+		int result = couponServiceImpl.insertCoupon(coupon);
 		
 		if(result > 0) {
 			request.getSession().setAttribute("successMsg", "쿠폰 등록이 완료되었습니다!");

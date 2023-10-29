@@ -4,15 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 //	ArrayList<Coupon> list = (ArrayList<Coupon>)request.getAttribute("list");
-	String successMsg = (String)session.getAttribute("successMsg");
-	String failMsg = (String)session.getAttribute("failMsg");
-	
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	int couponListCount = pi.getListCount();
-	int couponListPage = pi.getCurrentPage();
-	int couponStartPage = pi.getStartPage();
-	int couponEndPage = pi.getEndPage();
-	int couponMaxPage = pi.getMaxPage();
+//	String successMsg = (String)session.getAttribute("successMsg");
+//	String failMsg = (String)session.getAttribute("failMsg");
 %>             
 <!DOCTYPE html>
 <html>
@@ -56,7 +49,7 @@
             </div>
             <div class="h-content d-flex p-3">  <!-- 패딩 1rem -->
                 <div class="mr-auto">	
-                    조회수 <span class="selectCount"><%= pi.getListCount() %></span><span>개</span>
+                    조회수 <span class="selectCount">${ requestScope.pi.listCount }</span><span>개</span>
                 </div>
                 <div >
                     <button type="submit" onclick="showAddCouponModal()" class="btn btn-sm btn-warning">쿠폰등록</button>
@@ -111,19 +104,9 @@
         
         <!-- 페이징바 -->
 		<div class="paging-area">
-			<% if(couponListPage != 1) { %>
-				<button onclick="page('<%= couponListPage -1 %>');" class="btn btn-warning">&lt;</button>
-			<% } %>
-			<% for(int i = couponStartPage; i <= couponEndPage; i++) { %>
-				<% if(couponListPage != i) { %>
-					<button onclick="page('<%= i %>');" class="btn btn-warning"><%= i %></button>
-				<% } else { %>
-					<button disabled class="btn btn-warning"><%= i %></button>
-				<% } %>
-			<% } %>
-			<% if(couponListPage != couponMaxPage) { %>
-				<button onclick="page('<%= couponListPage + 1 %>');" class="btn btn-warning">&gt;</button>
-			<% } %>
+			<c:forEach var="p" begin="${ requestScope.pi.startPage }" end="${ requestScope.pi.endPage }">
+				<button onclick="location.href='${ pageContext.request.contextPath }/jhselect.cp?page=${ p }';"class="btn btn-warning">${ p }</button>
+			</c:forEach>
 		</div>	<!-- 페이징바 -->
    	</div>  <!-- rs-content -->
    	

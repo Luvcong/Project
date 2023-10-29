@@ -2,18 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.kh.semi.reward.model.vo.Reward, com.kh.semi.common.model.vo.PageInfo" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-// 	ArrayList<Reward> list = (ArrayList<Reward>)request.getAttribute("list");
-	String successMsg = (String)session.getAttribute("successMsg");
-	String failMsg = (String)session.getAttribute("failMsg");
-	
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	int rewardListCount = pi.getListCount();
-	int rewardListPage = pi.getCurrentPage();
-	int rewardStartPage = pi.getStartPage();
-	int rewardEndPage = pi.getEndPage();
-	int rewardMaxPage = pi.getMaxPage();
-%>         
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +41,7 @@
             </div>
             <div class="h-content d-flex p-3">  <!-- 패딩 1rem -->
                 <div class="mr-auto">	
-                    조회수 <span class="waiting"><%= pi.getListCount() %></span><span>개</span>
+                    조회수 <span class="waiting">${ requestScope.pi.listCount }</span><span>개</span>
                 </div>
                 <div >
                     <button onclick="showAddRewardModal()" class="btn btn-sm btn-warning">리워드 지급 / 차감</button>
@@ -160,22 +148,11 @@
         
    	<!-- 페이징바 -->
 	<div class="paging-area">
-		<% if(rewardListPage != 1) { %>
-			<button onclick="page('<%= rewardListPage -1 %>');" class="btn btn-warning">&lt;</button>
-		<% } %>
-		<% for(int i = rewardStartPage; i <= rewardEndPage; i++) { %>
-			<% if(rewardListPage != i) { %>
-				<button onclick="page('<%= i %>');" class="btn btn-warning"><%= i %></button>
-			<% } else { %>
-				<button disabled class="btn btn-warning"><%= i %></button>
-			<% } %>
-		<% } %>
-		<% if(rewardListPage != rewardMaxPage) { %>
-			<button onclick="page('<%= rewardListPage + 1 %>');" class="btn bbtn-warning">&gt;</button>
-		<% } %>
+		<c:forEach var="p" begin="${ requestScope.pi.startPage }" end="${requestScope.pi.endPage }">
+			<button onclick="location.href='${ pageContext.request.contextPath }/jhselect.rw?page=${ p }'" class="btn btn-warning">${ p }</button>
+		</c:forEach>
 	</div>	<!-- 페이징바 -->
    	</div>  <!-- rs-content -->
-
 	
 	<!-- alertMsg script -->
  	<c:choose>

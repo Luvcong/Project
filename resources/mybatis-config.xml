@@ -9,6 +9,10 @@
 	
  	<typeAliases>
 		<typeAlias type="com.kh.semi.board.recipe.model.vo.RecipeCategory" alias="category" />
+		<typeAlias type="com.kh.semi.coupon.model.vo.Coupon" alias="coupon" />
+		<typeAlias type="com.kh.semi.report.model.vo.Report" alias="report" />
+		<typeAlias type="com.kh.semi.reward.model.vo.Reward" alias="reward" />
+		<typeAlias type="com.kh.semi.dm.model.vo.Dm" alias='dm' />
  	</typeAliases>
 
 	<environments default="development">
@@ -28,5 +32,9 @@
  	 	
  	 	<mappers>
  	 		<mapper resource="/mapper/category/category-mapper.xml" />
+ 	 		<mapper resource="/mapper/coupon/coupon-mapper.xml" />
+ 	 		<mapper resource="/mapper/report/report-mapper.xml" />
+ 	 		<mapper resource="/mapper/reward/reward-mapper.xml" />
+ 	 		<mapper resource="/mapper/dm/dm-mapper.xml" />
  	 	</mappers>
 </configuration>

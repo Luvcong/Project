@@ -21,7 +21,7 @@ public class Dm {
 	private String dmStatus;
 	private String dmReply;
 	private String memId;			// 쪽지리스트에 띄워주기 위해 생성
-	private String memNickname;	// 쪽지리스트에 띄워주기 위해 생성
+	private String memNickname;		// 쪽지리스트에 띄워주기 위해 생성
 	
 	// 기본생성자
 	public Dm() {
